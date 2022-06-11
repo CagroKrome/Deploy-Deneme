@@ -1,17 +1,39 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('root')
+const root = createRoot(container)
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export default function App() {
+    let [results, setResults] = useState([])
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    function getResults() {
+        axios.get("http://localhost:3001/")
+        .then(response => setResults(response.data))
+    }
+
+    useEffect(() => {
+        getResults();
+    }, [])
+
+    let allResults = results.map((element, idx) => {
+        return (
+            <h1 key={element.id}>{element.name}</h1>
+        )
+    })
+
+    function submitBerkay() {
+        axios.post("http://localhost:3001")
+        .then(getResults)
+    }
+
+    return (
+        <div>
+            <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
+            {allResults}
+        </div>
+    )
+}
+
+root.render(<App />)
