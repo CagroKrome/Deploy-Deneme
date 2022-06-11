@@ -11,11 +11,15 @@ export default function App() {
 
     let [isloading, setIsLoading] = useState(true)
 
+    let [widthState, setWidthState] = useState(0)
+
     function getResults() {
         axios.get("https://deploy-deneme.herokuapp.com/")
         .then((response) => {
             setResults(response.data)
             setIsLoading(false)
+            setWidthState((response.data.length * 100) / 1000 + '%')
+
         })
     }
 
@@ -40,14 +44,21 @@ export default function App() {
     allResults.reverse();
 
     return (
-        <div className='body'>
-            <section className='info'>
-                <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
-                <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
-            </section>
-            <section>
-                {allResults}
-            </section>
+        <div className='xd'>
+            <div className='goals'>
+                <div style={{width: widthState}} className='goals-fill'>
+                </div>
+                Hedef: 1000 berkay
+            </div>
+            <div className='body'>
+                <section className='info'>
+                    <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
+                    <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
+                </section>
+                <section>
+                    {allResults}
+                </section>
+            </div>
         </div>
     )
 }
