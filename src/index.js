@@ -9,16 +9,19 @@ const root = createRoot(container)
 export default function App() {
     let [results, setResults] = useState([])
 
+    let [isloading, setIsLoading] = useState(true)
+
     function getResults() {
         axios.get("https://deploy-deneme.herokuapp.com/")
-        .then(response => setResults(response.data))
+        .then((response) => {
+            setResults(response.data)
+            setIsLoading(false)
+        })
     }
 
     useEffect(() => {
         getResults();
     }, [])
-
-    let [isloading, setIsLoading] = useState(true)
 
     let allResults = results.map((element, idx) => {
         return (
@@ -27,18 +30,24 @@ export default function App() {
     })
 
     function submitBerkay() {
+        setIsLoading(true)
         axios.post("https://deploy-deneme.herokuapp.com/")
-        .then(getResults)
-        .then(setIsLoading(false))
+        .then(() => {
+            getResults()
+        })
     }
 
     allResults.reverse();
 
     return (
-        <div>
-            <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
-            <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
-            {allResults}
+        <div className='body'>
+            <section className='info'>
+                <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
+                <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
+            </section>
+            <section>
+                {allResults}
+            </section>
         </div>
     )
 }
