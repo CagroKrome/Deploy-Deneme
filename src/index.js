@@ -9,7 +9,7 @@ export default function App() {
     let [results, setResults] = useState([])
 
     function getResults() {
-        axios.get("http://localhost:3001/")
+        axios.get("https://deploy-deneme.herokuapp.com/")
         .then(response => setResults(response.data))
     }
 
@@ -24,7 +24,7 @@ export default function App() {
     })
 
     function submitBerkay() {
-        axios.post("http://localhost:3001")
+        axios.post("https://deploy-deneme.herokuapp.com/")
         .then(getResults)
     }
 
