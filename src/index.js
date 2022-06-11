@@ -19,7 +19,7 @@ export default function App() {
 
     let allResults = results.map((element, idx) => {
         return (
-            <h1 key={element.id}>{element.name}</h1>
+            <h1 key={element.id}>{element.name} - {results.length}</h1>
         )
     })
 
