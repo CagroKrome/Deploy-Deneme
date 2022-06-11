@@ -19,7 +19,7 @@ export default function App() {
 
     let allResults = results.map((element, idx) => {
         return (
-            <h1 key={element.id}>{element.name} - {results.length}</h1>
+            <h1 key={element.id}>{element.name}</h1>
         )
     })
 
@@ -28,9 +28,12 @@ export default function App() {
         .then(getResults)
     }
 
+    allResults.sort(-1)
+
     return (
         <div>
             <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
+            <h1>Toplam berkay sayısı: {results.length}</h1>
             {allResults}
         </div>
     )
