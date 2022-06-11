@@ -18,6 +18,8 @@ export default function App() {
         getResults();
     }, [])
 
+    let [isloading, setIsLoading] = useState(true)
+
     let allResults = results.map((element, idx) => {
         return (
             <h1 key={element.id}>{element.name}</h1>
@@ -27,6 +29,7 @@ export default function App() {
     function submitBerkay() {
         axios.post("https://deploy-deneme.herokuapp.com/")
         .then(getResults)
+        .then(setIsLoading(false))
     }
 
     allResults.reverse();
@@ -34,7 +37,7 @@ export default function App() {
     return (
         <div>
             <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
-            <h1>Toplam berkay sayısı: {results.length}</h1>
+            <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
             {allResults}
         </div>
     )
