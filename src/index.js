@@ -28,7 +28,7 @@ export default function App() {
         .then(getResults)
     }
 
-    allResults.sort(-1)
+    allResults.reverse();
 
     return (
         <div>
