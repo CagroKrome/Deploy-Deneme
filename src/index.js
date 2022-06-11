@@ -4,6 +4,7 @@ import axios from 'axios';
 import { createRoot } from 'react-dom/client';
 const container = document.getElementById('root')
 const root = createRoot(container)
+import './index.css'
 
 export default function App() {
     let [results, setResults] = useState([])

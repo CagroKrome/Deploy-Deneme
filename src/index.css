@@ -1,0 +1,9 @@
+@keyframes h1an {
+    50% {
+        transform: scale(1.1)
+    }
+}
+
+h1 {
+    animation: h1an 0.5s ease;
+}
