@@ -36,8 +36,8 @@ export default function App() {
     function submitBerkay() {
         setIsLoading(true)
         axios.post("https://deploy-deneme.herokuapp.com/")
-        .then(() => {
-            getResults()
+        .then((response) => {
+            getResults();
         })
     }
 
@@ -48,12 +48,12 @@ export default function App() {
             <div className='goals'>
                 <div style={{width: widthState}} className='goals-fill'>
                 </div>
-                Hedef: 1000 berkay
+                Hedef: 1000 berkay xd
             </div>
             <div className='body'>
                 <section className='info'>
                     <button onClick={submitBerkay}>Bir berkay da sen ekle</button>
-                    <h1>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
+                    <h1 style={{animationName: isloading ? "Loading..." : "h1an"}}>Toplam berkay sayısı: {isloading ? "Loading..." : results.length}</h1>
                 </section>
                 <section>
                     {allResults}
